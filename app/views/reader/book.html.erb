@@ -1,0 +1,12 @@
+<% if @book_title %>
+  <%= Book.find(@book_number).title %>
+<% else %>
+  <h3>Chapter</h3>
+  <ul>
+    <% Chapter.where(book_number: @book_number).find_each do |chapter| %>
+      <%= content_tag :li do %>
+        <%= link_to chapter.chapter_number, book_chapter_path(@book_number, chapter.chapter_number), data: { chapter_number: chapter.chapter_number } %>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

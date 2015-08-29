@@ -1,0 +1,7 @@
+<ul>
+  <% @books.each do |book| %>
+    <%= content_tag :li do %>
+      <%= link_to book.title, book_path(book.id), data: { "book-number" => book.id } %>
+    <% end %>
+  <% end %>
+</ul>

@@ -1,0 +1,33 @@
+<body data-active-section="books" data-book-number="1">
+
+  <%= audio_tag("click.wav", id: "sound-click", preload: "auto") %>
+  <%= audio_tag("swipe.wav", id: "sound-swipe", preload: "auto") %>
+
+  <header>
+    <%= link_to root_path do %>
+      <i class="icon-back"></i>
+      <span id="back-link">Back</span>
+    <% end %>
+    <h1><span id="book-title-container">Genesis</span><span id="chapter-number-container"></span></h1>
+  </header>
+
+  <div class="container">
+
+    <section id="books">
+      <%= render "book_menu" %>
+    </section>
+
+    <section id="chapters">
+      <div id="chapter-container">
+      </div>
+      <div id="verse-container">
+      </div>
+    </section>
+
+    <section id="reader">
+      reader
+    </section>
+
+  </div>
+
+</body>

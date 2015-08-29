@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  get 'reader/index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'reader#index'
+
+  get "book/:book_number/chapter/:chapter_number/verse/:verse_number",  to: "reader#verse"
+  get "book/:book_number/chapter/:chapter_number",                      to: "reader#chapter"
+  get "book/:book_number",                                              to: "reader#book"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -12,7 +18,11 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resources :book do
+    resources :chapter do
+      resources :verse
+    end
+  end
 
   # Example resource route with options:
   #   resources :products do

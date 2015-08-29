@@ -1,0 +1,85 @@
+// Place all the styles related to the reader controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// icons
+@font-face                        { font-family: "icomoon"; src: font-url("icomoon.eot?-jkq4x7"); src: font-url("icomoon.eot?#iefix-jkq4x7") format("embedded-opentype"), font-url("icomoon.ttf?-jkq4x7") format("truetype"), font-url("icomoon.woff?-jkq4x7") format("woff"), font-url("icomoon.svg?-jkq4x7#icomoon") format("svg"); font-weight: normal; font-style: normal; }
+[class^="icon-"],
+[class*=" icon-"]                 { font-family: "icomoon"; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none;	line-height: 1; -webkit-font-smoothing: antialiased; }
+.icon-back:before                 { content: "\e600"; }
+
+// hardware graphics acceleration
+*                                 { transform: translate3d(0,0,0); }
+
+html                              { padding: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; height: 100%; }
+body                              { margin: 0; overflow-x: hidden; height: 100%; }
+section                           { width: 33.3333%; overflow-y: auto; height: 100%; float: left; box-sizing: border-box; }
+header                            { position: fixed; z-index: 1; top: 0; right: 0; left: 0; background-image: linear-gradient(-180deg, rgba(248,248,248, .9) 0%, rgba(249,249,249, .9) 48%, rgba(248,248,248, .9) 100%); transition: .1s transform cubic-bezier(.17,.67,.83,.65); }
+a                                 { text-decoration: none; }
+ul                                { margin: 0; padding: 0; list-style: none; }
+
+h1                                { text-align: center; margin: 15px; font-family: HelveticaNeue-Medium; font-size: 17px; color: #000; line-height: 20px; }
+h2                                {}
+h3                                { text-transform: uppercase; font-family: HelveticaNeue-Light; font-weight: 200; font-size: 14px; color: rgba(0,0,0,0.25); line-height: 17px; margin: 0 0 5px 10px; }
+p                                 { font-family: HelveticaNeue; font-size: 17px; color: #474747; line-height: 24px; margin: 0 0 10px 0; }
+
+header                            {
+  *                               { transition: all .25s linear; }
+  a                               { position: absolute; z-index: 1; left: 8px; top: 50%; transform: translateY(-50%); font-family: HelveticaNeue; font-size: 17px; line-height: 20px; }
+}
+body > .container                 { width: 299.9997%; height: 100%; @extend .clearfix; transition: .1s transform cubic-bezier(.17,.67,.83,.65); }
+#books                            {
+  a                               { display: block; font-family: HelveticaNeue-Medium; font-size: 16px; color: #fff; line-height: 19px; padding: 20px; }
+}
+#chapters                         {
+  #chapter-container h3           { margin-top: 65px; }
+  ul                              { @extend .clearfix; margin: 0 0 20px 0;
+    li                            { float: left; width: 14.2857%;
+      a                           { text-align: center; display: block; border-radius: 50%; font-family: HelveticaNeue-Medium; font-size: 12px; color: #fff; line-height: 12px; width: 36px; height: 12px; padding: 12px 0; margin: 0 auto;
+        &.active                  { background: #fff; }
+      }
+    }
+  }
+}
+#reader                           { background: #fff; padding: 65px 20px 20px 20px;
+  a                               { font-family: HelveticaNeue-Medium; font-size: 12px; }
+  h3                              { margin: 20px 0 10px 0; }
+}
+.clearfix                         {
+  &:before,
+  &:after                         { content: ""; display: table; }
+  &:after                         { clear: both; }
+}
+
+[data-active-section="books"]     {
+  > .container                    { transform: translateX(0); }
+  header                          { transform: translateX(100%);
+    *                             { opacity: 0; }
+  }
+}
+[data-active-section="chapters"]  {
+  > .container                    { transform: translateX(-33.3333%); }
+  header                          { transform: translateX(0);
+    *                             { opacity: 1; }
+  }
+}
+[data-active-section="reader"]    {
+  > .container                    { transform: translateX(-66.6666%); }
+  header                          { transform: translateX(0);
+    *                             { opacity: 1; }
+  }
+}
+
+// dynamic coloring
+$int: 1;
+$hue: 199;
+@while $int < 67
+{
+  [data-book-number="#{$int}"]    { background: hsl($hue, 80, 70);
+    #chapters a.active,
+    #reader a,
+    header a                      { color: hsl($hue, 80, 70); }
+  }
+  $int: $int + 1;
+  $hue: $hue - 3;
+}

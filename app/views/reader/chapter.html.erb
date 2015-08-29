@@ -1,0 +1,18 @@
+<% if @chapter_text %>
+  <h3>Chapter <%= @chapter_number %></h3>
+  <% Verse.where(book_number: @book_number, chapter_number: @chapter_number).find_each do |verse| %>
+    <%= content_tag :p do %>
+      <%= link_to verse.verse_number, book_chapter_verse_path(@book_number, @chapter_number, verse.verse_number) %>
+      <%= verse.body %>
+    <% end %>
+  <% end %>
+<% else %>
+  <h3>Verse</h3>
+  <ul>
+    <% Verse.where(book_number: @book_number, chapter_number: @chapter_number).find_each do |verse| %>
+      <%= content_tag :li do %>
+        <%= link_to verse.verse_number, book_chapter_verse_path(@book_number, @chapter_number, verse.verse_number) %>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
