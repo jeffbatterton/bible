@@ -34,7 +34,7 @@ $(document)
     # load verse menu
     $("#verse-container").load "/book/#{targetBook}/chapter/#{targetChapter}"
     # load entire chapter text
-    $("#reader").load "/book/#{targetBook}/chapter/#{targetChapter}?chapter_text=true"
+    $("#reader .content").load "/book/#{targetBook}/chapter/#{targetChapter}?chapter_text=true"
     e.preventDefault()
 
   # verse menu
@@ -62,12 +62,33 @@ $(document)
     e.preventDefault()
 
 $(document).ready ->
+
   # scroll faux header
   contentWrapper = document.querySelector("#reader")
   contentWrapper.addEventListener "scroll", ->
     $("#faux-header").css "-webkit-transform", "translateY(" + ($("#reader").scrollTop()*-1) + "px)"
     return
 
+  # infinite loading
+  $("#reader").scroll ->
+    scrollAmount   = $("#reader").scrollTop()
+    viewportHeight = $(window).height()
+    contentHeight  = $("#reader .content").height()
+    if (scrollAmount + viewportHeight - contentHeight) > 0
+      unless $("#reader").hasClass "loading"
+        infiniteLoad()
+
+
+
+
+
 # play sound
 playSound = (sound) ->
   $("#sound-#{sound}").get(0).play()
+
+# infinite loading
+infiniteLoad = ->
+  $("#reader")
+    .addClass("loading")
+    .find(".content")
+      .append "<i class='loading'></i>"

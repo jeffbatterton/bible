@@ -48,6 +48,7 @@ body > .container                 { width: 299.9997%; height: 100%; @extend .cle
 #reader                           { background: #fff; padding: 65px 20px 20px 20px;
   a                               { font-family: HelveticaNeue-Medium; font-size: 12px; }
   h3                              { margin: 20px 0 10px 0; }
+  .loading                        { display: block; width: 22px; height: 22px; background: rgba(0,0,0,.125); margin: 20px auto; border-radius: 50%; -webkit-animation: pulse 1s infinite; }
 }
 .clearfix                         {
   &:before,
@@ -79,11 +80,22 @@ $int: 1;
 $hue: 199;
 @while $int < 67
 {
-  [data-book-number="#{$int}"]    { background: hsl($hue, 80, 70);
+  #books [data-book-number="#{$int}"],
+  body[data-book-number="#{$int}"]{ background: hsl($hue, 80, 70);
     #chapters a.active,
     #reader a,
     header a                      { color: hsl($hue, 80, 70); }
   }
   $int: $int + 1;
   $hue: $hue - 3;
+}
+
+// animation
+@-webkit-keyframes pulse          {
+  30%                             { -webkit-transform: scale(1); }
+  40%                             { -webkit-transform: scale(1.1); }
+  50%                             { -webkit-transform: scale(1); }
+  60%                             { -webkit-transform: scale(1); }
+  70%                             { -webkit-transform: scale(1.2); }
+  80%                             { -webkit-transform: scale(1); }
 }
