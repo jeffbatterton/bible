@@ -9,12 +9,14 @@
 .icon-back:before                 { content: "\e600"; }
 
 // hardware graphics acceleration
-*                                 { transform: translate3d(0,0,0); }
+*                                 { -webkit-transform: translate3d(0,0,0); }
+
+::-webkit-scrollbar               { display: none; }
 
 html                              { padding: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; height: 100%; }
 body                              { margin: 0; overflow-x: hidden; height: 100%; }
 section                           { width: 33.3333%; overflow-y: auto; height: 100%; float: left; box-sizing: border-box; }
-header                            { position: fixed; z-index: 1; top: 0; right: 0; left: 0; background-image: linear-gradient(-180deg, rgba(248,248,248, .9) 0%, rgba(249,249,249, .9) 48%, rgba(248,248,248, .9) 100%); transition: .1s transform cubic-bezier(.17,.67,.83,.65); }
+header                            { overflow: hidden; position: fixed; z-index: 1; top: 0; right: 0; left: 0; background-image: linear-gradient(-180deg, rgba(248,248,248, 1) 0%, rgba(249,249,249, 1) 48%, rgba(248,248,248, 1) 100%); -webkit-transition: .1s -webkit-transform cubic-bezier(.17,.67,.83,.65); }
 a                                 { text-decoration: none; }
 ul                                { margin: 0; padding: 0; list-style: none; }
 
@@ -24,10 +26,12 @@ h3                                { text-transform: uppercase; font-family: Helv
 p                                 { font-family: HelveticaNeue; font-size: 17px; color: #474747; line-height: 24px; margin: 0 0 10px 0; }
 
 header                            {
-  *                               { transition: all .25s linear; }
-  a                               { position: absolute; z-index: 1; left: 8px; top: 50%; transform: translateY(-50%); font-family: HelveticaNeue; font-size: 17px; line-height: 20px; }
+  > a,
+  h1                              { transition: all .25s linear; }
+  > a                             { position: absolute; z-index: 1; left: 8px; top: 50%; transform: translateY(-50%); font-family: HelveticaNeue; font-size: 17px; line-height: 20px; }
+  #faux-header                    { -webkit-filter: blur(10px); filter: url(#blur-effect); opacity: .45; position: absolute; z-index: -1; top: 0; right: 0; bottom: 0; left: 0; padding: 92px 20px 20px 20px; }
 }
-body > .container                 { width: 299.9997%; height: 100%; @extend .clearfix; transition: .1s transform cubic-bezier(.17,.67,.83,.65); }
+body > .container                 { width: 299.9997%; height: 100%; @extend .clearfix; -webkit-transition: .1s -webkit-transform cubic-bezier(.17,.67,.83,.65); }
 #books                            {
   a                               { display: block; font-family: HelveticaNeue-Medium; font-size: 16px; color: #fff; line-height: 19px; padding: 20px; }
 }
@@ -52,20 +56,20 @@ body > .container                 { width: 299.9997%; height: 100%; @extend .cle
 }
 
 [data-active-section="books"]     {
-  > .container                    { transform: translateX(0); }
-  header                          { transform: translateX(100%);
+  > .container                    { -webkit-transform: translateX(0); }
+  header                          { -webkit-transform: translateX(100%);
     *                             { opacity: 0; }
   }
 }
 [data-active-section="chapters"]  {
-  > .container                    { transform: translateX(-33.3333%); }
-  header                          { transform: translateX(0);
+  > .container                    { -webkit-transform: translateX(-33.3333%); }
+  header                          { -webkit-transform: translateX(0);
     *                             { opacity: 1; }
   }
 }
 [data-active-section="reader"]    {
-  > .container                    { transform: translateX(-66.6666%); }
-  header                          { transform: translateX(0);
+  > .container                    { -webkit-transform: translateX(-66.6666%); }
+  header                          { -webkit-transform: translateX(0);
     *                             { opacity: 1; }
   }
 }
