@@ -45,6 +45,8 @@ $(document)
     playSound "swipe"
     # scroll to verse
     #################
+    # load faux header
+    $("#faux-header").html $("#reader").html()
     e.preventDefault()
 
   # back button
@@ -55,7 +57,16 @@ $(document)
     $("body").attr "data-active-section", targetSection
     # play sound (!!!)
     playSound "swipe"
+    # empty faux header
+    $("#faux-header").html ""
     e.preventDefault()
+
+$(document).ready ->
+  # scroll faux header
+  contentWrapper = document.querySelector("#reader")
+  contentWrapper.addEventListener "scroll", ->
+    $("#faux-header").css "-webkit-transform", "translateY(" + ($("#reader").scrollTop()*-1) + "px)"
+    return
 
 # play sound
 playSound = (sound) ->
